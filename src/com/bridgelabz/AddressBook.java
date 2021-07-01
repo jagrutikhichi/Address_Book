@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class AddressBook {
 		
 			System.out.println("Choose Operation you want to do");
 			System.out
-					.println("1. Add  2.edit ");
+					.println("1. Add  2.Edit  3.Delete ");
 			switch (s.nextInt()) {
 			case 1:
 				add();
@@ -20,8 +21,25 @@ public class AddressBook {
 			case 2:
 				edit();
 				break;
+			case 3:
+				delete();
+				break;
 			}
 			
+	}
+
+	private static void delete() {
+		System.out.println("Enter your First name:");
+		String fname = s.next();
+
+		Iterator<Address> iterator = list.listIterator();
+		while (iterator.hasNext()) {
+			Address person = iterator.next();
+
+			if (fname.equals(person.getFname())) {
+				list.remove(person);
+			}
+		}	
 	}
 
 	private static void edit() {
@@ -29,7 +47,7 @@ public class AddressBook {
 		System.out.println("Enter your First name:");
 		String fname = s.next();
 
-		ListIterator<Address> iterator = list.listIterator();
+		Iterator<Address> iterator = list.listIterator();
 
 		while (iterator.hasNext()) {
 			Address person = iterator.next();
